@@ -10,7 +10,7 @@ args = argv
 open_ports = []
 
 def show_help():
-	print("""
+	print(f"""
 	______________________________
 	|                            |
 	|                            |
