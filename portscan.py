@@ -102,7 +102,7 @@ if len(open_ports) > 1:
 	print('\n')
 else:
 	if len(open_ports) == 0:
-		print('\Not port is open!\n')
+		print('\nNot port is open!\n')
 		exit()
 	else:
 		for port in open_ports:
