@@ -31,20 +31,17 @@ try:
 	url = str(args[1])
 except:
 	show_help()
-	exit()
 
 if url in '--help':
 	show_help()
-	exit()
 else:
 	try:
 		ports = str(args[2])
 	except:
-		print('\nYou need pass 2 arguments\n\t\t ./portscan.py http://www.example.com <80 || ports.txt>\n')
+		show_help()
 
 	if ports in '--help':
 		show_help()
-		exit()
 
 if os.path.isfile(ports):
 	try:
@@ -104,6 +101,10 @@ if len(open_ports) > 1:
 		c += 1
 	print('\n')
 else:
-	for port in open_ports:
-		print(f'OPEN: {port}')
+	if len(open_ports) == 0:
+		print('\Not port is open!\n')
+		exit()
+	else:
+		for port in open_ports:
+			print(f'OPEN: {port}')
 	print()
