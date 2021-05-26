@@ -9,27 +9,57 @@ from time import sleep
 args = argv
 open_ports = []
 
+def show_help():
+	print("""
+	______________________________
+	|                            |
+	|                            |
+	|        PORT SCANNER        |
+	|                            |
+	|                            |
+	- Author: @marcos.dev.web
+
+    USAGE:
+
+      ./{os.path.basename(__file__)} www.example.com <80 || ports.txt>
+
+
+""")
+	exit()
+                           
 try:
 	url = str(args[1])
-	ports = str(args[2])
-
-	if os.path.isfile(ports):
-		try:
-			with open(ports, 'r') as f:
-				ports = [i for i in f.read().split('\n') if len(i) > 0]
-				f.close()
-		except:
-			print(f'Error to open file "{ports}"')
-			exit()
-	else:
-		if ports.isnumeric():
-			ports = [ports]
-		else:
-			print('You need pass or a port or a file with list of ports')
-			exit()
 except:
-	print('\nYou need pass 2 arguments\n\t\t ./portscan.py http://www.example.com 80\n')
+	show_help()
 	exit()
+
+if url in '--help':
+	show_help()
+	exit()
+else:
+	try:
+		ports = str(args[2])
+	except:
+		print('\nYou need pass 2 arguments\n\t\t ./portscan.py http://www.example.com <80 || ports.txt>\n')
+
+	if ports in '--help':
+		show_help()
+		exit()
+
+if os.path.isfile(ports):
+	try:
+		with open(ports, 'r') as f:
+			ports = [i for i in f.read().split('\n') if len(i) > 0]
+			f.close()
+	except:
+		print(f'Error to open file "{ports}"')
+		exit()
+else:
+	if ports.isnumeric():
+		ports = [ports]
+	else:
+		print('You need pass or a port or a file with list of ports')
+		exit()
 
 
 
